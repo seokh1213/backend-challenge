@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: kafka_dev
+
+  kafka:
+    bootstrap-servers: localhost:9093
+    consumer:
+      article:
+        group-id: keyword
+        auto-offset-reset: latest
+        max-poll-records: 20
+    producer:
+      article:
+        retries: 5
+    topics:
+      article:
+        name: article
+        partitions: 8
+        replication-factor: 1
+

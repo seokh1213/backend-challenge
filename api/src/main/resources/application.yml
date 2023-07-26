@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: backend-challenge
+  profiles:
+    include: mysql, redis, kafka
+    group:
+      "dev": "mysql_dev, redis_dev, kafka_dev"
+    active: dev
+  lifecycle:
+    timeout-per-shutdown-phase: 1m
+  main:
+    allow-circular-references: true # self injection(aop proxy)을 위해 사용
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+
+server:
+  port: 8081
+  shutdown: graceful
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type: trace

@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: mysql_dev
+
+  datasource:
+    content:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:13306/content
+      username: root
+      password: 1234
