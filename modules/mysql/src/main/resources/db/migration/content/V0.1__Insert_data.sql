@@ -1,0 +1,122 @@
+INSERT INTO user(name, created_dt, updated_dt)
+VALUES ('test1', NOW(), NOW()),
+       ('test2', NOW(), NOW()),
+       ('test3', NOW(), NOW()),
+       ('test4', NOW(), NOW()),
+       ('test5', NOW(), NOW()),
+       ('test6', NOW(), NOW()),
+       ('test7', NOW(), NOW()),
+       ('test8', NOW(), NOW()),
+       ('test9', NOW(), NOW()),
+       ('test10', NOW(), NOW()),
+       ('test11', NOW(), NOW()),
+       ('test12', NOW(), NOW()),
+       ('test13', NOW(), NOW()),
+       ('test14', NOW(), NOW()),
+       ('test15', NOW(), NOW()),
+       ('test16', NOW(), NOW()),
+       ('test17', NOW(), NOW()),
+       ('test18', NOW(), NOW()),
+       ('test19', NOW(), NOW()),
+       ('test20', NOW(), NOW()),
+       ('test21', NOW(), NOW()),
+       ('test22', NOW(), NOW()),
+       ('test23', NOW(), NOW()),
+       ('test24', NOW(), NOW()),
+       ('test25', NOW(), NOW()),
+       ('test26', NOW(), NOW()),
+       ('test27', NOW(), NOW()),
+       ('test28', NOW(), NOW()),
+       ('test29', NOW(), NOW()),
+       ('test30', NOW(), NOW()),
+       ('test31', NOW(), NOW()),
+       ('test32', NOW(), NOW()),
+       ('test33', NOW(), NOW()),
+       ('test34', NOW(), NOW()),
+       ('test35', NOW(), NOW()),
+       ('test36', NOW(), NOW()),
+       ('test37', NOW(), NOW()),
+       ('test38', NOW(), NOW()),
+       ('test39', NOW(), NOW()),
+       ('test40', NOW(), NOW()),
+       ('test41', NOW(), NOW()),
+       ('test42', NOW(), NOW()),
+       ('test43', NOW(), NOW()),
+       ('test44', NOW(), NOW()),
+       ('test45', NOW(), NOW()),
+       ('test46', NOW(), NOW()),
+       ('test47', NOW(), NOW()),
+       ('test48', NOW(), NOW()),
+       ('test49', NOW(), NOW()),
+       ('test50', NOW(), NOW()),
+       ('test51', NOW(), NOW()),
+       ('test52', NOW(), NOW()),
+       ('test53', NOW(), NOW()),
+       ('test54', NOW(), NOW()),
+       ('test55', NOW(), NOW()),
+       ('test56', NOW(), NOW()),
+       ('test57', NOW(), NOW()),
+       ('test58', NOW(), NOW()),
+       ('test59', NOW(), NOW()),
+       ('test60', NOW(), NOW()),
+       ('test61', NOW(), NOW()),
+       ('test62', NOW(), NOW()),
+       ('test63', NOW(), NOW()),
+       ('test64', NOW(), NOW()),
+       ('test65', NOW(), NOW()),
+       ('test66', NOW(), NOW()),
+       ('test67', NOW(), NOW()),
+       ('test68', NOW(), NOW()),
+       ('test69', NOW(), NOW()),
+       ('test70', NOW(), NOW()),
+       ('test71', NOW(), NOW()),
+       ('test72', NOW(), NOW()),
+       ('test73', NOW(), NOW()),
+       ('test74', NOW(), NOW()),
+       ('test75', NOW(), NOW()),
+       ('test76', NOW(), NOW()),
+       ('test77', NOW(), NOW()),
+       ('test78', NOW(), NOW()),
+       ('test79', NOW(), NOW()),
+       ('test80', NOW(), NOW()),
+       ('test81', NOW(), NOW()),
+       ('test82', NOW(), NOW()),
+       ('test83', NOW(), NOW()),
+       ('test84', NOW(), NOW()),
+       ('test85', NOW(), NOW()),
+       ('test86', NOW(), NOW()),
+       ('test87', NOW(), NOW()),
+       ('test88', NOW(), NOW()),
+       ('test89', NOW(), NOW()),
+       ('test90', NOW(), NOW()),
+       ('test91', NOW(), NOW()),
+       ('test92', NOW(), NOW()),
+       ('test93', NOW(), NOW()),
+       ('test94', NOW(), NOW()),
+       ('test95', NOW(), NOW()),
+       ('test96', NOW(), NOW()),
+       ('test97', NOW(), NOW()),
+       ('test98', NOW(), NOW()),
+       ('test99', NOW(), NOW()),
+       ('test100', NOW(), NOW());
+
+
+INSERT INTO target(user_id, target_group_id, created_dt, updated_dt)
+SELECT id, 1, NOW(), NOW()
+FROM user
+WHERE name IN ((SELECT name FROM user WHERE name BETWEEN 'test1' AND 'test30')
+               UNION
+               (SELECT name FROM user WHERE name BETWEEN 'test70' AND 'test100'));
+
+
+INSERT INTO reward(reward_type, reward_group_id, created_dt, updated_dt)
+VALUES ('CASH', 1, now(), now());
+
+INSERT INTO quest(activation, reward_group_id, created_dt, updated_dt)
+VALUES (true, 1, now(), now());
+
+INSERT INTO target_group(quest_id, target_group_id, created_dt, updated_dt)
+SELECT id, 1, now(), now()
+FROM quest
+ORDER BY id
+LIMIT 1;

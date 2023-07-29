@@ -9,3 +9,5 @@ spring:
       url: jdbc:mysql://localhost:13306/content
       username: root
       password: 1234
+  flyway:
+    enabled: false

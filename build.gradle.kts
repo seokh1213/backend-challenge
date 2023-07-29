@@ -21,14 +21,6 @@ allprojects {
     }
 }
 
-configure(subprojects.filter { it.name.contains("base") }) {
-    apply(plugin = "kotlin")
-
-    dependencies {
-        implementation(project(":modules:base"))
-    }
-}
-
 configure(subprojects.filter { it.name != "modules" }) {
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-kapt")
