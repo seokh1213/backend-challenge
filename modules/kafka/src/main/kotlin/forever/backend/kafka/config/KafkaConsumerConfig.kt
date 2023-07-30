@@ -22,7 +22,7 @@ class CustomStringJsonMessageConverter(objectMapper: ObjectMapper) : StringJsonM
 
     override fun extractAndConvertValue(record: ConsumerRecord<*, *>?, type: Type?): Any {
         if (record?.value() == null) {
-            return KafkaNull.INSTANCE;
+            return KafkaNull.INSTANCE
         }
 
         if (type == String::class.java) {
@@ -76,12 +76,12 @@ class KafkaConsumerConfig {
     }
 
     @Bean
-    fun articleConsumerFactory(
+    fun consumerFactory(
         objectMapper: ObjectMapper,
         @Value("\${spring.kafka.bootstrap-servers}") bootstrapServers: String,
-        @Value("\${spring.kafka.consumer.article.group-id}") groupId: String,
-        @Value("\${spring.kafka.consumer.article.auto-offset-reset}") autoOffsetReset: String,
-        @Value("\${spring.kafka.consumer.article.max-poll-records}") maxPollRecords: String,
+        @Value("\${spring.kafka.consumer.group-id}") groupId: String,
+        @Value("\${spring.kafka.consumer.auto-offset-reset}") autoOffsetReset: String,
+        @Value("\${spring.kafka.consumer.max-poll-records}") maxPollRecords: String,
     ): ConsumerFactory<String, String> {
         val props = mutableMapOf<String, Any>().apply {
             put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers)

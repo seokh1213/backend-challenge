@@ -20,9 +20,4 @@ class ArticleController(
         return BaseResponse(articleService.createArticle(createArticleRequest))
     }
 
-    @RequestMapping
-    fun test(): BaseResponse<String> {
-        articleService.test()
-        return BaseResponse("test")
-    }
 }

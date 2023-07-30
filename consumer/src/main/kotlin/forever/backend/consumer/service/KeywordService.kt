@@ -21,10 +21,6 @@ class KeywordService(
             val filteredKeywords = keywordList.parallelStream()
                 .filter { data.contains(it) }
                 .toList()
-
-            val filteredKeywords2 = keywordList.asSequence()
-                .filter { data.contains(it) }
-                .toList()
         }
     }
 

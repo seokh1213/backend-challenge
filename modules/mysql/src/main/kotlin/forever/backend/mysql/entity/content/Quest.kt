@@ -1,5 +1,6 @@
 package forever.backend.mysql.entity.content
 
+import forever.backend.base.enums.QuestType
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -16,6 +17,10 @@ data class Quest(
 
     @Column(nullable = false)
     var activation: Boolean,
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    var questType: QuestType,
 
     @CreatedDate
     var createdDt: Instant? = null,

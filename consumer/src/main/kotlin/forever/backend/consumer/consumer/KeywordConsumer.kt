@@ -10,8 +10,7 @@ class KeywordConsumer(
     private val keywordService: KeywordService
 ) {
 
-
-    @KafkaListener(topics = ["\${spring.kafka.topics.article.name}"])
+    @KafkaListener(topics = ["\${spring.kafka.topics.article.name}"], groupId = "keyword")
     fun listener(articleMessage: ArticleMessage) {
         keywordService.process(articleMessage)
     }

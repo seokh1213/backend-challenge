@@ -112,8 +112,8 @@ WHERE name IN ((SELECT name FROM user WHERE name BETWEEN 'test1' AND 'test30')
 INSERT INTO reward(reward_type, reward_group_id, created_dt, updated_dt)
 VALUES ('CASH', 1, now(), now());
 
-INSERT INTO quest(activation, reward_group_id, created_dt, updated_dt)
-VALUES (true, 1, now(), now());
+INSERT INTO quest(activation, reward_group_id, quest_type, created_dt, updated_dt)
+VALUES (true, 1, 'FIRST_READ', now(), now());
 
 INSERT INTO target_group(quest_id, target_group_id, created_dt, updated_dt)
 SELECT id, 1, now(), now()
