@@ -61,12 +61,6 @@ services:
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
-
-  redis:
-    image: redis:7
-    container_name: "redis"
-    ports:
-      - "16379:6379"
   kafka-ui:
     container_name: kafka-ui
     image: provectuslabs/kafka-ui:latest
@@ -77,3 +71,8 @@ services:
       KAFKA_CLUSTERS_0_NAME: kafka-docker
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+  redis:
+    image: redis:7
+    container_name: "redis"
+    ports:
+      - "16379:6379"
