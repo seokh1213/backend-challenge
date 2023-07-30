@@ -1,17 +1,17 @@
 package forever.backend.api.service
 
 import forever.backend.api.model.request.CreateArticleRequest
+import forever.backend.kafka.KafkaSendService
 import forever.backend.kafka.model.ArticleMessage
 import forever.backend.mysql.entity.content.Article
 import forever.backend.mysql.repository.content.ArticleRepository
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
 @Service
 class ArticleService(
     private val articleRepository: ArticleRepository,
-    private val kafkaTemplate: KafkaTemplate<String, Any>,
+    private val kafkaSendService: KafkaSendService,
     @Value("\${spring.kafka.topics.article.name}") private val articleTopic: String
 ) {
 
@@ -24,7 +24,7 @@ class ArticleService(
         )
 
         // kafka event 발행
-        kafkaTemplate.send(
+        kafkaSendService.send(
             articleTopic,
             article.id!!.toString(),
             ArticleMessage(article.id!!, article.title, article.content)

@@ -1,16 +1,14 @@
 package forever.backend.consumer.service
 
 import forever.backend.consumer.module.quest.QuestModule
+import forever.backend.kafka.KafkaSendService
 import forever.backend.kafka.model.ReadActionMessage
 import forever.backend.kafka.model.RewardMessage
 import forever.backend.mysql.entity.content.Quest
 import forever.backend.mysql.repository.content.QuestRepository
 import forever.backend.mysql.repository.content.TargetGroupRepository
 import forever.backend.mysql.repository.content.TargetRepository
-import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,15 +16,10 @@ class ReadService(
     private val targetRepository: TargetRepository,
     private val targetGroupRepository: TargetGroupRepository,
     private val questRepository: QuestRepository,
-    @Qualifier("roundRobinKafkaTemplate")
-    private val kafkaTemplate: KafkaTemplate<String, Any>,
+    private val kafkaSendService: KafkaSendService,
     @Value("\${spring.kafka.topics.reward.name}") private val rewardTopic: String,
     questModuleList: List<QuestModule>
 ) {
-    companion object {
-        private val logger = LoggerFactory.getLogger(ReadService::class.java)
-    }
-
     private val questModuleMap = questModuleList.associateBy { it.questType() }
 
     fun checkReadQuest(readActionMessage: ReadActionMessage) {
@@ -38,7 +31,7 @@ class ReadService(
             }.flatMap { (module, quest) ->
                 module.process(readActionMessage.userId, quest)
             }.forEach {
-                kafkaTemplate.send(rewardTopic, RewardMessage(readActionMessage.userId, it.rewardType)) // reward 지급
+                kafkaSendService.send(rewardTopic, RewardMessage(readActionMessage.userId, it.rewardType)) // reward 지급
             }
     }
 
