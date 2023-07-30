@@ -16,7 +16,7 @@ class IntKeyPartitioner : Partitioner {
         valueBytes: ByteArray?,
         cluster: Cluster
     ): Int {
-        val numPartitions = cluster.partitionCountForTopic(topic)
+        val numPartitions = cluster.partitionCountForTopic(topic) ?: 1
         return (key as String).toInt() % numPartitions
     }
 }
