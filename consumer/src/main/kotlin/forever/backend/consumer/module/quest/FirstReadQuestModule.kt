@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component
 @Component
 class FirstReadQuestModule(
     private val rewardRepository: RewardRepository
-) : QuestModule() {
+) : QuestModule {
 
-    override fun questType() = QuestType.FIRST_READ
+    override val questType = QuestType.FIRST_READ
 
     override fun process(userId: Long, quest: Quest): List<Reward> {
         if (!validate(userId, quest)) {

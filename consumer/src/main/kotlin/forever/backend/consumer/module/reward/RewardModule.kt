@@ -2,8 +2,8 @@ package forever.backend.consumer.module.reward
 
 import forever.backend.base.enums.RewardType
 
-abstract class RewardModule {
-    abstract fun rewardType(): RewardType
+interface RewardModule {
+    val rewardType: RewardType
 
-    abstract fun process(userId: Long)
+    fun process(userId: Long)
 }

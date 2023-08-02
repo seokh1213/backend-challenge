@@ -13,7 +13,7 @@ class RewardService(
         private val logger = LoggerFactory.getLogger(RewardService::class.java)
     }
 
-    private val rewardModuleMap = rewardModuleList.associateBy { it.rewardType() }
+    private val rewardModuleMap = rewardModuleList.associateBy { it.rewardType }
 
     fun process(userId: Long, rewardType: RewardType) {
         val rewardModule = rewardModuleMap[rewardType]

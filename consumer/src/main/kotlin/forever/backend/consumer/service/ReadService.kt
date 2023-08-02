@@ -20,7 +20,7 @@ class ReadService(
     @Value("\${spring.kafka.topics.reward.name}") private val rewardTopic: String,
     questModuleList: List<QuestModule>
 ) {
-    private val questModuleMap = questModuleList.associateBy { it.questType() }
+    private val questModuleMap = questModuleList.associateBy { it.questType }
 
     fun checkReadQuest(readActionMessage: ReadActionMessage) {
         val activeQuestList = getActiveQuestList(readActionMessage.userId)
