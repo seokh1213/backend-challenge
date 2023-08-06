@@ -14,7 +14,7 @@ class RewardConsumer(
         private val logger = LoggerFactory.getLogger(RewardConsumer::class.java)
     }
 
-    @KafkaListener(topics = ["\${spring.kafka.topics.reward.name}"], groupId = "keyword")
+    @KafkaListener(topics = ["\${spring.kafka.topics.reward.name}"], groupId = "reward")
     fun listener(rewardMessage: RewardMessage) {
         logger.info("[consumer] read action consumed. {}", rewardMessage)
         rewardService.process(rewardMessage.userId, rewardMessage.rewardType)
