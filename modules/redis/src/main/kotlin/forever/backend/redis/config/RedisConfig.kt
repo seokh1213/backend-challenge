@@ -23,16 +23,13 @@ class RedisConfig {
     }
 
     @Bean
-    fun redisTemplate(redisConnectionFactory: RedisConnectionFactory): RedisTemplate<String, String> {
-        val template = RedisTemplate<String, String>()
-        template.connectionFactory = redisConnectionFactory
-        template.keySerializer = StringRedisSerializer()
-        template.valueSerializer = StringRedisSerializer()
-
-        template.afterPropertiesSet()
-
-        template.opsForValue().get("test")
-        return template
-    }
+    fun redisTemplate(redisConnectionFactory: RedisConnectionFactory) =
+        RedisTemplate<String, String>().apply {
+            connectionFactory = redisConnectionFactory
+            keySerializer = StringRedisSerializer()
+            valueSerializer = StringRedisSerializer()
+        }.also {
+            it.afterPropertiesSet()
+        }
 
 }
